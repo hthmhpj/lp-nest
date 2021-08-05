@@ -4,4 +4,5 @@ export declare class WxNotice {
     constructor(httpService: HttpService);
     dailyNotice(): Promise<void>;
     weeklyNotice(): Promise<void>;
+    下午两点(): Promise<void>;
 }

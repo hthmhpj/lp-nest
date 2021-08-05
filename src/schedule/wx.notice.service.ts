@@ -23,14 +23,31 @@ export class WxNotice {
     });
   }
 
-  @Cron(CronExpression.EVERY_HOUR)
+  @Cron('0 30 13 * * 1-5')
   async weeklyNotice() {
     const res = await this.httpService.post(
       'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5',
       {
         msgtype: 'text',
         text: {
-          content: '写周报',
+          content: '1点半',
+          mentioned_list: ['@all'],
+        },
+      },
+    );
+    res.subscribe(({ data }) => {
+      console.log(data);
+    });
+  }
+
+  @Cron('0 14 * * *')
+  async 下午两点() {
+    const res = await this.httpService.post(
+      'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5',
+      {
+        msgtype: 'text',
+        text: {
+          content: '下午两点',
           mentioned_list: ['@all'],
         },
       },

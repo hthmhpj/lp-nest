@@ -33,7 +33,19 @@ let WxNotice = class WxNotice {
         const res = await this.httpService.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5', {
             msgtype: 'text',
             text: {
-                content: '写周报',
+                content: '1点半',
+                mentioned_list: ['@all'],
+            },
+        });
+        res.subscribe(({ data }) => {
+            console.log(data);
+        });
+    }
+    async 下午两点() {
+        const res = await this.httpService.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5', {
+            msgtype: 'text',
+            text: {
+                content: '下午两点',
                 mentioned_list: ['@all'],
             },
         });
@@ -49,11 +61,17 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], WxNotice.prototype, "dailyNotice", null);
 __decorate([
-    schedule_1.Cron(schedule_1.CronExpression.EVERY_HOUR),
+    schedule_1.Cron('0 30 13 * * 1-5'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], WxNotice.prototype, "weeklyNotice", null);
+__decorate([
+    schedule_1.Cron('0 14 * * *'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], WxNotice.prototype, "\u4E0B\u5348\u4E24\u70B9", null);
 WxNotice = __decorate([
     common_1.Injectable(),
     __metadata("design:paramtypes", [axios_1.HttpService])
