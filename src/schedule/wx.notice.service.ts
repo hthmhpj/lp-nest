@@ -6,7 +6,7 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 export class WxNotice {
   constructor(private httpService: HttpService) {}
 
-  @Cron('0 50 09 * * 1-5')
+  @Cron('0 0 11 * * 1-5')
   async dailyNotice() {
     const res = await this.httpService.post(
       'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5',
@@ -23,7 +23,7 @@ export class WxNotice {
     });
   }
 
-  @Cron('0 10 10 * * 4')
+  @Cron('0 10 11 * * 4')
   async weeklyNotice() {
     const res = await this.httpService.post(
       'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5',

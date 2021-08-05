@@ -43,13 +43,13 @@ let WxNotice = class WxNotice {
     }
 };
 __decorate([
-    schedule_1.Cron('0 43 09 * * 1-5'),
+    schedule_1.Cron('0 0 11 * * 1-5'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], WxNotice.prototype, "dailyNotice", null);
 __decorate([
-    schedule_1.Cron('0 10 17 * * 5'),
+    schedule_1.Cron('0 10 11 * * 4'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
