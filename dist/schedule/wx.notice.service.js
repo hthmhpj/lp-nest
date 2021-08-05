@@ -17,6 +17,18 @@ let WxNotice = class WxNotice {
     constructor(httpService) {
         this.httpService = httpService;
     }
+    async dailyNotice() {
+        const res = await this.httpService.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5', {
+            msgtype: 'text',
+            text: {
+                content: '写日报',
+                mentioned_list: ['@all'],
+            },
+        });
+        res.subscribe(({ data }) => {
+            console.log(data);
+        });
+    }
     async weeklyNotice() {
         const res = await this.httpService.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5', {
             msgtype: 'text',
@@ -31,7 +43,13 @@ let WxNotice = class WxNotice {
     }
 };
 __decorate([
-    schedule_1.Cron(schedule_1.CronExpression.EVERY_10_SECONDS),
+    schedule_1.Cron('0 43 09 * * 1-5'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], WxNotice.prototype, "dailyNotice", null);
+__decorate([
+    schedule_1.Cron('0 10 17 * * 5'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
