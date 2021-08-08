@@ -6,7 +6,7 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 export class WxNotice {
   constructor(private httpService: HttpService) {}
 
-  @Cron('0 40 11 * * 1-5')
+  @Cron('0 40 9 * * 1-5')
   async dailyNotice() {
     const res = await this.httpService.post(
       'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5',
@@ -40,14 +40,46 @@ export class WxNotice {
     });
   }
 
-  @Cron(CronExpression.EVERY_MINUTE)
-  async 下午两点() {
+  @Cron(CronExpression.MONDAY_TO_FRIDAY_AT_09_30AM)
+  async MONDAY_TO_FRIDAY_AT_09_30AM() {
     const res = await this.httpService.post(
       'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5',
       {
         msgtype: 'text',
         text: {
-          content: 'EVERY_MINUTE',
+          content: 'MONDAY_TO_FRIDAY_AT_09_30AM',
+          mentioned_list: ['@all'],
+        },
+      },
+    );
+    res.subscribe(({ data }) => {
+      console.log(data);
+    });
+  }
+  @Cron(CronExpression.EVERY_HOUR)
+  async EVERY_HOUR() {
+    const res = await this.httpService.post(
+      'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5',
+      {
+        msgtype: 'text',
+        text: {
+          content: 'EVERY_HOUR',
+          mentioned_list: ['@all'],
+        },
+      },
+    );
+    res.subscribe(({ data }) => {
+      console.log(data);
+    });
+  }
+  @Cron(CronExpression.EVERY_DAY_AT_10PM)
+  async EVERY_DAY_AT_10PM() {
+    const res = await this.httpService.post(
+      'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5',
+      {
+        msgtype: 'text',
+        text: {
+          content: 'EVERY_DAY_AT_10PM',
           mentioned_list: ['@all'],
         },
       },

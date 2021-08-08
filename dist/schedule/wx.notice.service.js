@@ -41,11 +41,35 @@ let WxNotice = class WxNotice {
             console.log(data);
         });
     }
-    async 下午两点() {
+    async MONDAY_TO_FRIDAY_AT_09_30AM() {
         const res = await this.httpService.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5', {
             msgtype: 'text',
             text: {
-                content: 'EVERY_MINUTE',
+                content: 'MONDAY_TO_FRIDAY_AT_09_30AM',
+                mentioned_list: ['@all'],
+            },
+        });
+        res.subscribe(({ data }) => {
+            console.log(data);
+        });
+    }
+    async EVERY_HOUR() {
+        const res = await this.httpService.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5', {
+            msgtype: 'text',
+            text: {
+                content: 'EVERY_HOUR',
+                mentioned_list: ['@all'],
+            },
+        });
+        res.subscribe(({ data }) => {
+            console.log(data);
+        });
+    }
+    async EVERY_DAY_AT_10PM() {
+        const res = await this.httpService.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5', {
+            msgtype: 'text',
+            text: {
+                content: 'EVERY_DAY_AT_10PM',
                 mentioned_list: ['@all'],
             },
         });
@@ -55,7 +79,7 @@ let WxNotice = class WxNotice {
     }
 };
 __decorate([
-    schedule_1.Cron('0 40 11 * * 1-5'),
+    schedule_1.Cron('0 40 9 * * 1-5'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
@@ -67,11 +91,23 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], WxNotice.prototype, "weeklyNotice", null);
 __decorate([
-    schedule_1.Cron(schedule_1.CronExpression.EVERY_MINUTE),
+    schedule_1.Cron(schedule_1.CronExpression.MONDAY_TO_FRIDAY_AT_09_30AM),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], WxNotice.prototype, "\u4E0B\u5348\u4E24\u70B9", null);
+], WxNotice.prototype, "MONDAY_TO_FRIDAY_AT_09_30AM", null);
+__decorate([
+    schedule_1.Cron(schedule_1.CronExpression.EVERY_HOUR),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], WxNotice.prototype, "EVERY_HOUR", null);
+__decorate([
+    schedule_1.Cron(schedule_1.CronExpression.EVERY_DAY_AT_10PM),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], WxNotice.prototype, "EVERY_DAY_AT_10PM", null);
 WxNotice = __decorate([
     common_1.Injectable(),
     __metadata("design:paramtypes", [axios_1.HttpService])
