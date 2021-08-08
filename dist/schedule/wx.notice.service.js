@@ -45,7 +45,7 @@ let WxNotice = class WxNotice {
         const res = await this.httpService.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5', {
             msgtype: 'text',
             text: {
-                content: '下午两点',
+                content: 'EVERY_MINUTE',
                 mentioned_list: ['@all'],
             },
         });
@@ -67,7 +67,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], WxNotice.prototype, "weeklyNotice", null);
 __decorate([
-    schedule_1.Cron('0 14 * * *'),
+    schedule_1.Cron(schedule_1.CronExpression.EVERY_MINUTE),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)

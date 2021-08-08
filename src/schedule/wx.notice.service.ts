@@ -40,14 +40,14 @@ export class WxNotice {
     });
   }
 
-  @Cron('0 14 * * *')
+  @Cron(CronExpression.EVERY_MINUTE)
   async 下午两点() {
     const res = await this.httpService.post(
       'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5',
       {
         msgtype: 'text',
         text: {
-          content: '下午两点',
+          content: 'EVERY_MINUTE',
           mentioned_list: ['@all'],
         },
       },
