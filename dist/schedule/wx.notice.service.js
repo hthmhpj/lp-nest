@@ -17,11 +17,11 @@ let WxNotice = class WxNotice {
     constructor(httpService) {
         this.httpService = httpService;
     }
-    async dailyNotice() {
+    async 日报() {
         const res = await this.httpService.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5', {
             msgtype: 'text',
             text: {
-                content: '写日报',
+                content: '日报',
                 mentioned_list: ['@all'],
             },
         });
@@ -29,47 +29,11 @@ let WxNotice = class WxNotice {
             console.log(data);
         });
     }
-    async weeklyNotice() {
+    async 周报() {
         const res = await this.httpService.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5', {
             msgtype: 'text',
             text: {
-                content: '1点半',
-                mentioned_list: ['@all'],
-            },
-        });
-        res.subscribe(({ data }) => {
-            console.log(data);
-        });
-    }
-    async MONDAY_TO_FRIDAY_AT_09_30AM() {
-        const res = await this.httpService.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5', {
-            msgtype: 'text',
-            text: {
-                content: 'MONDAY_TO_FRIDAY_AT_09_30AM',
-                mentioned_list: ['@all'],
-            },
-        });
-        res.subscribe(({ data }) => {
-            console.log(data);
-        });
-    }
-    async EVERY_HOUR() {
-        const res = await this.httpService.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5', {
-            msgtype: 'text',
-            text: {
-                content: 'EVERY_HOUR',
-                mentioned_list: ['@all'],
-            },
-        });
-        res.subscribe(({ data }) => {
-            console.log(data);
-        });
-    }
-    async EVERY_DAY_AT_10PM() {
-        const res = await this.httpService.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5', {
-            msgtype: 'text',
-            text: {
-                content: 'EVERY_DAY_AT_10PM',
+                content: '周报',
                 mentioned_list: ['@all'],
             },
         });
@@ -83,31 +47,13 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], WxNotice.prototype, "dailyNotice", null);
+], WxNotice.prototype, "\u65E5\u62A5", null);
 __decorate([
-    schedule_1.Cron('0 30 13 * * 1-5'),
+    schedule_1.Cron('0 0 18 * * 1-5'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], WxNotice.prototype, "weeklyNotice", null);
-__decorate([
-    schedule_1.Cron(schedule_1.CronExpression.MONDAY_TO_FRIDAY_AT_09_30AM),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], WxNotice.prototype, "MONDAY_TO_FRIDAY_AT_09_30AM", null);
-__decorate([
-    schedule_1.Cron(schedule_1.CronExpression.EVERY_HOUR),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], WxNotice.prototype, "EVERY_HOUR", null);
-__decorate([
-    schedule_1.Cron(schedule_1.CronExpression.EVERY_DAY_AT_10PM),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], WxNotice.prototype, "EVERY_DAY_AT_10PM", null);
+], WxNotice.prototype, "\u5468\u62A5", null);
 WxNotice = __decorate([
     common_1.Injectable(),
     __metadata("design:paramtypes", [axios_1.HttpService])

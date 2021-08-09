@@ -9,13 +9,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ScheduleModule = void 0;
 const common_1 = require("@nestjs/common");
 const axios_1 = require("@nestjs/axios");
+const dynamic_cron_controller_1 = require("./dynamic.cron.controller");
+const dynamic_cron_service_1 = require("./dynamic.cron.service");
+const heroku_heartbeat_service_1 = require("./heroku.heartbeat.service");
 const wx_notice_service_1 = require("./wx.notice.service");
 let ScheduleModule = class ScheduleModule {
 };
 ScheduleModule = __decorate([
     common_1.Module({
         imports: [axios_1.HttpModule],
-        providers: [wx_notice_service_1.WxNotice],
+        providers: [dynamic_cron_service_1.DynamicCronService, heroku_heartbeat_service_1.HerokuHeartBeat, wx_notice_service_1.WxNotice],
+        controllers: [dynamic_cron_controller_1.DynamicCronController],
     })
 ], ScheduleModule);
 exports.ScheduleModule = ScheduleModule;

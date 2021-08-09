@@ -1,7 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-export declare class WxNotice {
+export declare class HerokuHeartBeat {
     private httpService;
     constructor(httpService: HttpService);
-    日报(): Promise<void>;
-    周报(): Promise<void>;
 }
