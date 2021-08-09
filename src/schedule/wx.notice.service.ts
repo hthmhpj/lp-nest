@@ -22,6 +22,22 @@ export class WxNotice {
       console.log(data);
     });
   }
+  @Cron('0 00 18 * * 1-5')
+  async dailyNotice2() {
+    const res = await this.httpService.post(
+      'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5',
+      {
+        msgtype: 'text',
+        text: {
+          content: 'xxx',
+          mentioned_list: ['@all'],
+        },
+      },
+    );
+    res.subscribe(({ data }) => {
+      console.log(data);
+    });
+  }
 
   @Cron('0 30 13 * * 1-5')
   async weeklyNotice() {
@@ -56,15 +72,14 @@ export class WxNotice {
       console.log(data);
     });
   }
-  @Cron(CronExpression.EVERY_HOUR)
-  async EVERY_HOUR() {
+  @Cron(CronExpression.EVERY_10_MINUTES)
+  async EVERY_10_MINUTES() {
     const res = await this.httpService.post(
       'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5',
       {
         msgtype: 'text',
         text: {
-          content: 'EVERY_HOUR',
-          mentioned_list: ['@all'],
+          content: '10分钟一次，防止程序空闲被heroku停止',
         },
       },
     );
