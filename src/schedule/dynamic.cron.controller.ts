@@ -11,6 +11,7 @@ export class DynamicCronController {
   }
   @Get('add')
   async add() {
+    
     this.dynamicCronService.addCronJob('add', '5');
     return { code: 0, message: '成功' };
   }

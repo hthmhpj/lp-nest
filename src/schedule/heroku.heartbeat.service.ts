@@ -6,12 +6,12 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 export class HerokuHeartBeat {
   constructor(private httpService: HttpService) {}
 
-  @Cron(CronExpression.EVERY_10_MINUTES)
-  async EVERY_10_MINUTES() {
-    // 程序30分钟无活动会被heroku停止
-    const res = await this.httpService.get('https://cnodejs.org/api/v1/topics');
-    res.subscribe(() => {
-      console.log('HerokuHeartBeat');
-    });
-  }
+  // @Cron(CronExpression.EVERY_10_MINUTES)
+  // async EVERY_10_MINUTES() {
+  //   // 程序30分钟无活动会被heroku停止
+  //   const res = await this.httpService.get('https://cnodejs.org/api/v1/topics');
+  //   res.subscribe(() => {
+  //     console.log('HerokuHeartBeat');
+  //   });
+  // }
 }
