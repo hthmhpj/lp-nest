@@ -41,6 +41,18 @@ let WxNotice = class WxNotice {
             console.log(data);
         });
     }
+    async EVERY_30_MINUTES() {
+        const res = await this.httpService.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5', {
+            msgtype: 'text',
+            text: {
+                content: 'EVERY_30_MINUTES',
+                mentioned_list: ['@all'],
+            },
+        });
+        res.subscribe(({ data }) => {
+            console.log(data);
+        });
+    }
 };
 __decorate([
     schedule_1.Cron('0 40 9 * * 1-5'),
@@ -54,6 +66,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], WxNotice.prototype, "\u5468\u62A5", null);
+__decorate([
+    schedule_1.Cron(schedule_1.CronExpression.EVERY_30_MINUTES),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], WxNotice.prototype, "EVERY_30_MINUTES", null);
 WxNotice = __decorate([
     common_1.Injectable(),
     __metadata("design:paramtypes", [axios_1.HttpService])
