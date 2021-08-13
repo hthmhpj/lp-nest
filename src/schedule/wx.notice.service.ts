@@ -38,4 +38,20 @@ export class WxNotice {
       console.log(data);
     });
   }
+  @Cron(CronExpression.EVERY_30_MINUTES)
+  async EVERY_30_MINUTES() {
+    const res = await this.httpService.post(
+      'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d495e6ea-b6dc-4e1c-9ee6-46729a2c12b5',
+      {
+        msgtype: 'text',
+        text: {
+          content: 'EVERY_30_MINUTES',
+          mentioned_list: ['@all'],
+        },
+      },
+    );
+    res.subscribe(({ data }) => {
+      console.log(data);
+    });
+  }
 }
